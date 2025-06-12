@@ -63,7 +63,7 @@ header {
   border-bottom: 1px solid #eeeeee;
 }
 .header-blur-bg {
-  background: url('images/music1.jpg') center/cover no-repeat;
+  background: #fffdf9;
   filter: blur(8px);
   opacity: 0.8;
   position: absolute;
@@ -122,7 +122,7 @@ header p {
   padding: 12px 24px;
   font-size: 1em;
   font-weight: bold;
-  color: white;
+  color: rgb(0, 0, 0);
   background: transparent;
   border: none;
   border-radius: 50px;
@@ -147,28 +147,30 @@ header p {
   color: #333;
 }
 .category-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  gap: 24px;
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 0 20px;
+  display: flex;
+  overflow-x: auto;
+  gap: 12px;
+  padding: 0 16px;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
 }
 .category-card {
-  border-radius: 20px;
-  padding: 40px 20px;
-  text-decoration: none;
-  color: #333;
+  flex: 0 0 auto;
+  padding: 12px 18px;
+  border-radius: 16px;
+  font-size: 1em;
   font-weight: bold;
-  font-size: 1.3em;
-  text-align: center;
-  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  white-space: nowrap;
+  scroll-snap-align: center;
+  background: #fff;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+  transition: 0.2s ease;
 }
 .category-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
 }
+
 .pastel1 { background: #fff1f0; }
 .pastel2 { background: #f0faff; }
 .pastel3 { background: #fefbe7; }
