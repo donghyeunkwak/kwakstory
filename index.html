@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>곽씨이야기</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&family=Pretendard&display=swap" rel="stylesheet"/>
+  <style>
+  * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Pretendard', sans-serif;
+  background: #fcf9f5;
+  color: #444;
+  text-align: center;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* 🔮 엠비언트 글로우 */
+.ambient-glow {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  z-index: -1;
+  overflow: hidden;
+}
+.glow {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,200,200,0.4), transparent 70%);
+  filter: blur(80px);
+  animation: float 12s ease-in-out infinite alternate;
+}
+.glow:nth-child(2) {
+  top: 30%;
+  left: 60%;
+  background: radial-gradient(circle, rgba(200,255,255,0.4), transparent 70%);
+  animation-delay: 3s;
+}
+.glow:nth-child(3) {
+  top: 70%;
+  left: 20%;
+  background: radial-gradient(circle, rgba(200,255,200,0.4), transparent 70%);
+  animation-delay: 6s;
+}
+@keyframes float {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(40px, -30px) scale(1.2); }
+}
+
+/* 🧊 헤더 + 블러 배경 */
+header {
+  position: relative;
+  padding: 60px 20px 30px;
+  overflow: hidden;
+  border-bottom: 1px solid #eeeeee;
+}
+.header-blur-bg {
+  background: url('images/music1.jpg') center/cover no-repeat;
+  filter: blur(8px);
+  opacity: 0.8;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
+
+header > *:not(.header-blur-bg) {
+  position: relative;
+  z-index: 1;
+}
+
+/* 프로필 영역 */
+.profile {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto 15px;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  border: 2px solid #ddd;
+}
+.profile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+header h1 {
+  font-family: 'Nanum Pen Script', cursive;
+  font-size: 3.2em;
+  margin-bottom: 10px;
+  color: #2c2c2c;
+}
+header p {
+  font-size: 1.1em;
+  color: #777;
+}
+
+/* 🎵 음악플레이어 */
+.music-player {
+  margin-top: 30px;
+}
+#visualizer {
+  width: 50%;
+  max-width: 500px;
+  height: 50px;
+  display: block;
+  margin: 20px auto 10px;
+  background: transparent;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+#playBtn {
+  padding: 12px 24px;
+  font-size: 1em;
+  font-weight: bold;
+  color: white;
+  background: transparent;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  transition: all 0.3s ease;
+}
+#playBtn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+}
+
+/* 🧩 카테고리 섹션 */
+.category-section {
+  padding: 50px 20px;
+  background: #fffdf9;
+}
+.category-section h2 {
+  font-family: 'Nanum Pen Script', cursive;
+  font-size: 2.5em;
+  margin-bottom: 30px;
+  color: #333;
+}
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 24px;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+.category-card {
+  border-radius: 20px;
+  padding: 40px 20px;
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+  font-size: 1.3em;
+  text-align: center;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.category-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+}
+.pastel1 { background: #fff1f0; }
+.pastel2 { background: #f0faff; }
+.pastel3 { background: #fefbe7; }
+.pastel4 { background: #f6f0ff; }
+
+/* 📝 포스트 리스트 */
+main {
+  padding: 50px 20px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+.post-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.post-card {
+  background: #fff;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  text-align: left;
+  transition: 0.3s ease;
+  cursor: pointer;
+}
+.post-card:hover {
+  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+  transform: translateY(-4px);
+}
+.post-title {
+  font-weight: bold;
+  font-size: 1.2em;
+  margin-bottom: 8px;
+}
+.post-excerpt {
+  color: #666;
+  font-size: 0.95em;
+}
+
+/* 📄 에세이/글 상세 */
+article {
+  background: #fff;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+  text-align: left;
+}
+article h2 {
+  font-size: 1.8em;
+  margin-bottom: 16px;
+}
+article p {
+  line-height: 1.6;
+  margin-bottom: 12px;
+}
+#backBtn {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 0.9em;
+  border: none;
+  background: #ddd;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+  </style>
+</head>
+<body>
+
+  <!-- 배경 -->
+  <div class="ambient-glow">
+    <div class="glow" style="top:10%; left:10%;"></div>
+    <div class="glow"></div>
+    <div class="glow"></div>
+  </div>
+
+  <header>
+    <div class="header-blur-bg"></div>
+    <div class="profile">
+      <img src="images/a.png" alt="곽 프로필" />
+    </div>
+    <h1>곽씨이야기</h1>
+    <p>세상의 흔들리지 않고 나답게 살아가기 위한 생각과 기록의 공간</p>
+    <audio id="audio" crossorigin="anonymous"></audio>
+    <div class="music-player">
+      <canvas id="visualizer" width="600" height="150"></canvas>
+      <button id="playBtn">재생</button>
+    </div>
+  </header>
+
+  <section class="category-section">
+    <div class="category-grid">
+      <a href="#" class="category-card pastel1">🌿<br/>세상이야기</a>
+      <a href="#" class="category-card pastel2">💻<br/>개발이야기</a>
+      <a href="#" class="category-card pastel3">🐶<br/>점이이야기</a>
+      <a href="#" class="category-card pastel4">☕<br/>일상이야기</a>
+    </div>
+  </section>
+
+  <main id="content"></main>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const audio = document.getElementById('audio');
+      const playBtn = document.getElementById('playBtn');
+      const canvas = document.getElementById('visualizer');
+      const ctx = canvas.getContext('2d');
+    
+      const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      const source = audioCtx.createMediaElementSource(audio);
+      const analyser = audioCtx.createAnalyser();
+      analyser.fftSize = 256;
+    
+      const bufferLength = analyser.frequencyBinCount;
+      const dataArray = new Uint8Array(bufferLength);
+    
+      source.connect(analyser);
+      analyser.connect(audioCtx.destination);
+    
+      const playlist = [
+        { src: 'music/music.mp3', image: 'images/music.jpg' },
+        { src: 'music/music1.mp3', image: 'images/music1.jpg' },
+      ];
+      let currentTrack = 0;
+    
+      function draw() {
+        requestAnimationFrame(draw);
+        analyser.getByteFrequencyData(dataArray);
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+        const barWidth = (canvas.width / bufferLength) * 1.5;
+        const barGap = 2;
+        let x = 0;
+        for (let i = 0; i < bufferLength; i++) {
+          const barHeight = dataArray[i];
+          const hue = i * 3;
+          ctx.fillStyle = `hsl(${hue}, 80%, 60%)`;
+          ctx.fillRect(x, canvas.height - barHeight, barWidth - barGap, barHeight);
+          x += barWidth;
+        }
+      }
+    
+      function updateHeaderBackgroundByMusic() {
+        const bgDiv = document.querySelector('.header-blur-bg');
+        const imagePath = playlist[currentTrack]?.image || 'images/default.jpg';
+        if (bgDiv) {
+          bgDiv.style.backgroundImage = `url('${imagePath}')`;
+          bgDiv.style.opacity = 1;
+        }
+      }
+    
+      playBtn.addEventListener('click', () => {
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+    
+        if (audio.paused) {
+          audio.src = playlist[currentTrack].src;
+          audio.load();
+          audio.play();
+          draw();
+          playBtn.textContent = '일시정지';
+          updateHeaderBackgroundByMusic();
+        } else {
+          audio.pause();
+          playBtn.textContent = '🎵 재생';
+        }
+      });
+    
+      audio.addEventListener('ended', () => {
+        currentTrack = (currentTrack + 1) % playlist.length;
+        audio.src = playlist[currentTrack].src;
+        updateHeaderBackgroundByMusic();
+        audio.play();
+      });
+    
+      const content = document.getElementById('content');
+      let currentCategory = '';
+      let pages = {};
+      let posts = {};
+    
+      fetch('https://script.google.com/macros/s/AKfycbyNeSnwPg1awLASFupB1C3rA93OpvBs8QsSp3FFSlp6SYUCT75HYXWcxU1Y2AusvghxVQ/exec')
+        .then(res => res.json())
+        .then(data => {
+          console.log('불러온 데이터:', data);
+    
+          const categorized = {};
+          data.forEach((post, i) => {
+            const { id, category, title, excerpt, content: fullContent } = post;
+            const postId = id || `${i}-${category}`;
+            if (!categorized[category]) categorized[category] = [];
+            categorized[category].push({ postId, title, excerpt, content: fullContent });
+            posts[postId] = `
+              <article>
+                <h2>${title}</h2>
+                <p>${fullContent}</p>
+                <button id="backBtn">← 목록으로</button>
+              </article>
+            `;
+          });
+    
+          for (const [category, list] of Object.entries(categorized)) {
+            let emoji = '';
+            if (category.includes('세상')) emoji = '🌿';
+            else if (category.includes('개발')) emoji = '💻';
+            else if (category.includes('점이')) emoji = '🐶';
+            else if (category.includes('일상')) emoji = '☕';
+    
+            pages[category] = `
+              <h2>${emoji} ${category}</h2>
+              <div class="post-list">
+                ${list.map(post => `
+                  <div class="post-card" data-post="${post.postId}">
+                    <div class="post-title">${post.title}</div>
+                    <div class="post-excerpt">${post.excerpt}</div>
+                  </div>
+                `).join('')}
+              </div>
+            `;
+          }
+    
+          document.querySelectorAll('.category-card').forEach(card => {
+            card.addEventListener('click', e => {
+              e.preventDefault();
+              const raw = card.textContent.replace(/\s+/g, '').trim();
+              currentCategory = raw.replace(/🌿|💻|🐶|☕/g, '');
+              content.innerHTML = pages[currentCategory] || `<p>글이 아직 없어요 :)</p>`;
+              window.scrollTo({ top: content.offsetTop, behavior: 'smooth' });
+            });
+          });
+        })
+        .catch(err => {
+          console.error('데이터 불러오기 실패:', err);
+        });
+    
+      document.addEventListener('click', e => {
+        const card = e.target.closest('.post-card');
+        if (card?.dataset.post) {
+          const postId = card.dataset.post;
+          content.innerHTML = posts[postId] || `<p>글을 불러올 수 없습니다.</p>`;
+          window.scrollTo({ top: content.offsetTop, behavior: 'smooth' });
+        }
+        if (e.target.id === 'backBtn') {
+          content.innerHTML = pages[currentCategory] || '';
+          window.scrollTo({ top: content.offsetTop, behavior: 'smooth' });
+        }
+      });
+    });
+    </script>
+    
+    
+</body>
+</html>
