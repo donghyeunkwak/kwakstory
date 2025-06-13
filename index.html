@@ -18,17 +18,19 @@
       align-items: center;
       flex-direction: column;
       position: relative;
+      text-align: center;
+      padding: 20px;
     }
 
     /* 구름 애니메이션 */
     .cloud {
       position: absolute;
       top: 20%;
-      width: 200px;
-      height: 60px;
+      width: 150px;
+      height: 40px;
       background: #fff;
       border-radius: 100px;
-      filter: blur(8px);
+      filter: blur(6px);
       opacity: 0.5;
       animation: floatCloud 60s linear infinite;
     }
@@ -41,17 +43,17 @@
     }
 
     .cloud::before {
-      width: 100px;
-      height: 100px;
-      top: -40px;
-      left: 10px;
+      width: 80px;
+      height: 80px;
+      top: -30px;
+      left: 5px;
     }
 
     .cloud::after {
-      width: 120px;
-      height: 120px;
-      top: -60px;
-      left: 90px;
+      width: 90px;
+      height: 90px;
+      top: -45px;
+      left: 70px;
     }
 
     .cloud:nth-child(1) { left: -200px; animation-delay: 0s; }
@@ -63,18 +65,19 @@
       100% { transform: translateX(120vw); }
     }
 
-    /* 콘텐츠 중앙 정렬 */
+    /* 중앙 콘텐츠 */
     .center {
       display: flex;
       flex-direction: column;
       align-items: center;
       z-index: 10;
       text-align: center;
+      max-width: 90%;
     }
 
     .logo-wrap {
-      width: 120px;
-      height: 120px;
+      width: 100px;
+      height: 100px;
       border-radius: 50%;
       padding: 6px;
       background: linear-gradient(135deg, #ff9a9e, #fad0c4, #a1c4fd, #c2e9fb);
@@ -105,7 +108,7 @@
 
     h1 {
       font-family: 'Nanum Pen Script', cursive;
-      font-size: 3.5rem;
+      font-size: 2.5rem;
       margin-bottom: 1rem;
       white-space: nowrap;
       overflow: hidden;
@@ -121,10 +124,11 @@
     }
 
     p {
-      font-size: 1.2rem;
+      font-size: 1rem;
       margin-bottom: 2rem;
       opacity: 0;
       animation: fadeInText 1s ease 3s forwards;
+      line-height: 1.4;
     }
 
     @keyframes fadeInText {
@@ -174,6 +178,37 @@
 
     .door-frame.closed .right-door {
       transform: translateX(0);
+    }
+
+    /* 반응형 */
+    @media (max-width: 480px) {
+      .logo-wrap {
+        width: 80px;
+        height: 80px;
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+
+      p {
+        font-size: 0.95rem;
+      }
+
+      .cloud {
+        width: 120px;
+        height: 30px;
+      }
+
+      .cloud::before {
+        width: 60px;
+        height: 60px;
+      }
+
+      .cloud::after {
+        width: 70px;
+        height: 70px;
+      }
     }
   </style>
 </head>
